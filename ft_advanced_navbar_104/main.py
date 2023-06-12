@@ -3,10 +3,9 @@ import flet as ft
 
 class Header(ft.UserControl):
     def __init__(self):
-        #
         self.nav = ft.Container(
             opacity=1,
-            animate_opacity=ft.Animation(300, "ease"),
+            animate_opacity=ft.Animation(500, "ease"),
             content=ft.Row(
                 controls=[
                     ft.Text("Home", size=9),
@@ -15,7 +14,7 @@ class Header(ft.UserControl):
                 ]
             ),
         )
-        #
+
         self.header = ft.Container(
             height=80,
             bgcolor="teal",
@@ -30,12 +29,7 @@ class Header(ft.UserControl):
             content=ft.Column(
                 alignment="center",
                 spacing=15,
-                controls=[
-                    # Title section ...
-                    ft.Row(controls=[ft.Text("My Title", size=21)]),
-                    # Navigation section ...
-                    self.nav,
-                ],
+                controls=[ft.Row(controls=[ft.Text("My Title", size=21)]), self.nav],
             ),
         )
         super().__init__()
@@ -87,11 +81,7 @@ class FakeContent(ft.Container):
         self.content.on_scroll = lambda e: self.header.dynamic_navigation(e)
 
         for i in range(50):
-            self.content.controls.append(
-                ft.Row(
-                    controls=[ft.Text(i, size=11)],
-                )
-            )
+            self.content.controls.append(ft.Row(controls=[ft.Text(i, size=11)]))
 
         self.content.controls.insert(0, ft.Divider(height=25, color="transparent"))
 
@@ -105,10 +95,7 @@ def main(page: ft.Page):
     page.add(
         ft.Stack(
             expand=True,
-            controls=[
-                ft.Row(expand=True, controls=[content]),
-                header,
-            ],
+            controls=[ft.Row(expand=True, controls=[content]), header],
         )
     )
 
