@@ -1,5 +1,5 @@
-# import flet as ft
-# import pandas as pd
+import flet as ft
+import pandas as pd
 
 
 # Step 2: Importing and Loading the Data
@@ -36,9 +36,9 @@
 #         pass
 
 
-# def main(page: ft.Page):
-#     page.update()
+def main(page: ft.Page):
+    page.update()
 
 
-# if __name__ == "__main__":
-#     ft.flet.app(target=main)
+if __name__ == "__main__":
+    ft.flet.app(target=main)
