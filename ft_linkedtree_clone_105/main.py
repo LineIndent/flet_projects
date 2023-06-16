@@ -31,20 +31,17 @@ class SocialDashboard(ft.UserControl):
             bottom=0,
             left=0,
             right=0,
-            bgcolor="teal",
+            bgcolor=ft.colors.with_opacity(0.0085, "white"),
+            blur=ft.Blur(10, 10, ft.BlurTileMode.MIRROR),
+            # bgcolor="teal",
+            # shadow=ft.BoxShadow(
+            #     spread_radius=2,
+            #     blur_radius=4,
+            #     color=ft.colors.with_opacity(0.25, "black"),
+            #     offset=ft.Offset(2, 2),
+            # ),
             padding=ft.padding.only(left=60, right=60),
-            shadow=ft.BoxShadow(
-                spread_radius=2,
-                blur_radius=4,
-                color=ft.colors.with_opacity(0.25, "black"),
-                offset=ft.Offset(2, 2),
-            ),
             animate=ft.Animation(500, "ease"),
-            content=ft.Column(
-                alignment="center",
-                spacing=15,
-                controls=[],
-            ),
         )
         super().__init__()
 
@@ -59,7 +56,7 @@ class FakeContent(ft.Container):
         bgcolor="#23262d",
         expand=True,
         padding=ft.padding.only(top=10, right=15, left=15),
-        # alignment=ft.alignment.top_center,
+        alignment=ft.alignment.top_center,
         content=ft.Column(
             expand=True,
             alignment="center",
@@ -71,12 +68,9 @@ class FakeContent(ft.Container):
             bgcolor=bgcolor,
             expand=expand,
             padding=padding,
-            # alignment=alignment,
+            alignment=alignment,
             content=content,
         )
-
-        # self.header = header
-        # self.content.on_scroll = lambda e: self.header.dynamic_navigation(e)
 
         for i in range(50):
             self.content.controls.append(
@@ -85,4 +79,4 @@ class FakeContent(ft.Container):
 
 
 if __name__ == "__main__":
-    ft.flet.app(target=main)
+    ft.flet.app(target=main, assets_dir="assets")
