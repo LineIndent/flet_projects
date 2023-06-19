@@ -1,0 +1,11 @@
+site-name: "Flet Material UI"
+
+repo-url: "https://github.com/LineIndent/flet_ui"
+repo-name: "LineIndent/flet_ui"
+
+theme:
+  - bgcolor: "teal"
+  - primary: "teal700"
+
+navigation:
+  - Start: "installation.py"
