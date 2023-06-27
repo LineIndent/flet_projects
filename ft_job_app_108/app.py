@@ -5,6 +5,8 @@ import flet as ft
 import aiohttp
 import asyncio
 
+# API Endpoint: https://api-pourhakimi.vercel.app/
+
 
 # now create the individual components for the application
 class JobEntry(ft.Container):
