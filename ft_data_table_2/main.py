@@ -37,7 +37,7 @@ class Form(ft.Container):
                 ft.Row(
                     alignment="center",
                     controls=[
-                        ft.Text("Data Form Field", size=28, weight="bold"),
+                        # ft.Text("Data Form Field", size=28, weight="bold"),
                     ],
                 ),
                 ft.Row(
