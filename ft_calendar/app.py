@@ -1,5 +1,10 @@
+# - [Python Tutorial With Flet: Task + Management Application](https://www.youtube.com/watch?v=HSiTkOPZmtc)
+
+""" Flet Calendar App"""
+
+import flet as ft
 from flet import (
-    flet,
+#    flet,
     Page,
     Column,
     Row,
@@ -19,16 +24,24 @@ import calendar
 
 obj = calendar.Calendar()
 
+"""
+    some additional functions can be implementing a DB with this.
+    Adding more months and the function to choose the month + year
+"""
 
 def main(page: Page):
 
+    # dictionary to store the dates
     _content_dic = {}
+
+    # datetime to get current date so we can highlight it automatically
     _year_now = int(date.today().strftime("%Y"))
     _month_now = int(date.today().strftime("%m"))
     _day_now = int(date.today().strftime("%d"))
 
     def DeleteAnimation(e):
         if e.data == "true":
+            # we need to get to the control of intrest, i.e the text, so this long line of code does it for us.
             e.control.content.controls[0].offset = transform.Offset(-0.50, 0)
             e.control.content.controls[0].update()
 
@@ -52,7 +65,8 @@ def main(page: Page):
                         gradient=LinearGradient(
                             begin=alignment.center_left,
                             end=alignment.center_right,
-                            colors=["#1e293b", "shadow"],
+                            #colors=["#1e293b", "shadow"],
+                            colors=["white", "shadow"],
                         ),
                         content=Text(
                             f"You have a task on\n{e.control.data}",
@@ -76,6 +90,7 @@ def main(page: Page):
                                         duration=900, curve="ease"
                                     ),
                                     animate_opacity=200,
+                                    color="white",
                                 ),
                                 IconButton(
                                     icon=icons.DELETE_ROUNDED,
@@ -108,9 +123,10 @@ def main(page: Page):
         if e.control.height != _main.height * 0.55:
             e.control.height = _main.height * 0.55
             e.control.update()
-
+            # when we expand the container, we want to make the calendar visible
             for key in _content_dic:
                 for month in _content_dic[key]:
+                    # we make sure we get the right month and year
                     if month == _month_now and key == _year_now:
                         _content_dic[key][month].visible = True
                         _content_dic[key][month].update()
@@ -236,9 +252,19 @@ def main(page: Page):
     #
 
     # 11
-    for year in range(2022, 2024):
+    # first loop thorugh the date range => I`m only going to do this year + this month but the logic is the same`
+    _year = int(date.today().strftime("%Y"))
+    _month = int(date.today().strftime("%m"))
+#    for year in range(2022, 2024):
+    for year in range(_year, _year+1):
+        # make a new key in the dictionary for the year
+        # it,s going to be a nested loop
         _content_dic[year] = {}
-        for month in range(11, 12):
+        # now we loop through the months (1-12)
+        # but in this case I`ll just take this current month
+        # hay que poner en el mes que estamos si no no salen los dias...
+#        for month in range(10, 11):
+        for month in range(_month, _month+1):
             #
             _inner_column = Column(
                 horizontal_alignment="start",
@@ -261,13 +287,14 @@ def main(page: Page):
             #
             _inner_column.controls.append(_row_weekday)
 
-            #
+            # now we iterate through the days
             for days in obj.monthdayscalendar(year, month):
                 _row = Row(
                     spacing=2,
                     alignment="center",
                 )
                 _inner_column.controls.append(_row)
+                # inner loop because days => nested list
                 for day in days:
                     if day != 0:
                         __ = Container(
@@ -281,12 +308,14 @@ def main(page: Page):
                                 size=10,
                                 color="white70",
                             ),
+                            # this will be used to show the date
                             data=f"{months[month - 1]} {day}, {year}",
                             on_click=lambda e: _create_entry(e),
                             on_hover=lambda e: _highlight_date(e),
                         )
                         _row.controls.append(__)
 
+                        # here we check if the date is today and change the box bgcolor
                         # if month == _month_now and day == _day_now:
                         #     __.bgcolor = "#0c4a6e"
 
@@ -328,4 +357,6 @@ def main(page: Page):
 
 
 if __name__ == "__main__":
-    flet.app(target=main)
+#    flet.app(target=main)
+    ft.app(target=main)
+    
