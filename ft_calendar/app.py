@@ -355,7 +355,6 @@ def main(page: Page):
     )
     page.update()
 
-
 if __name__ == "__main__":
 #    flet.app(target=main)
     ft.app(target=main)
